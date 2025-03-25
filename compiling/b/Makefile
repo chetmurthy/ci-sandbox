@@ -21,7 +21,7 @@ dos-unix-absolute-path::
 DOSABSPATH=$(shell ./dos-absolute-path.pl)
 
 dos-unix-absolute-path::
-	$(OCAMLC) -I $(DOSABSPATH)"\\..\\a" foo.cmo -o dos-absolute-path.exe || true
+	$(OCAMLC) -I "$(DOSABSPATH)\\..\\a" foo.cmo -o dos-absolute-path.exe || true
 
 
 clean::
