@@ -45,6 +45,11 @@ jobs:
           opam list
           opam pin list
 
+      - name: install ocamlfind
+        run: |
+          opam install -y ocamlfind
+        shell: bash
+
       - name: Run Something
         run: |
           opam exec -- make -C compiling all
