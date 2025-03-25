@@ -47,5 +47,5 @@ jobs:
 
       - name: Run Something
         run: |
-          opam exec -- bash doit.sh
+          opam exec -- make all
         shell: bash
