@@ -45,15 +45,7 @@ jobs:
           opam list
           opam pin list
 
-      - name: Show doit.sh
-        run: |
-          cat -v doit.sh
-
-      - name: Show camlp5_comm.sh
-        run: |
-          cat -v camlp5_comm.sh
-
       - name: Run Something
         run: |
-          opam exec -- make all
+          opam exec -- make -C compiling all
         shell: bash
