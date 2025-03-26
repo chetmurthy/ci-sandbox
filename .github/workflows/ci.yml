@@ -47,7 +47,7 @@ jobs:
 
       - name: install ocamlfind
         run: |
-          opam install -y gocamlfind
+          opam install -y ocamlfind
         shell: bash
 
       - name: Run Something
