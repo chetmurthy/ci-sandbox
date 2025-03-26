@@ -47,10 +47,10 @@ jobs:
 
       - name: install ocamlfind
         run: |
-          opam install -y ocamlfind
+          opam install -y gocamlfind
         shell: bash
 
       - name: Run Something
         run: |
-          opam exec -- make -C compiling all
+          opam exec -- make -C newline all
         shell: bash
