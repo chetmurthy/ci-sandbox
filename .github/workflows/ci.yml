@@ -61,13 +61,25 @@ jobs:
           opam install -y ocamlfind fmt
         shell: bash
 
-      - name: Run test with ./BOING
+      - name: Run test with ./BOING invoking perl
         run: |
           opam exec -- make -C scripts/hello1 all
         shell: bash
 
-      - name: Run test with ./LAUNCH.PL
+      - name: Run test with ./LAUNCH.PL invoking perl
         if: always()
         run: |
-          opam exec -- make -C scripts/hello1 LAUNCHER=./LAUNCH.PL all
+          opam exec -- make -C scripts/hello1 LAUNCHER=./LAUNCH.PL SRC=hello.perl INST=HELLO.PL INSTOTHER=hello.pl all
+        shell: bash
+
+      - name: Run test with ./BOING invoking bash
+        if: always()
+        run: |
+          opam exec -- make -C scripts/hello1 LAUNCHER=./BOING SRC=hello.bash INST=HELLO.SH INSTOTHER=hello.sh all
+        shell: bash
+
+      - name: Run test with ./LAUNCH.PL invoking bash
+        if: always()
+        run: |
+          opam exec -- make -C scripts/hello1 LAUNCHER=./LAUNCH.PL SRC=hello.bash INST=HELLO.SH INSTOTHER=hello.sh all
         shell: bash
