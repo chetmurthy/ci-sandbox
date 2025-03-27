@@ -3,7 +3,7 @@ INCL=../a
 endif
 
 all:
-	ocamlc -I $(INCL) foo.cmo -o foo
+	ocamlc -I $(INCL) foo.cmo bar.ml -o foobar
 
 clean::
-	rm -f foo *.cm*
+	rm -f foobar *.cm*
