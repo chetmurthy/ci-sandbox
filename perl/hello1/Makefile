@@ -6,10 +6,12 @@ all:
 	./BOING true
 	mkdir -p $(BINDIR)
 	cp hello.pl $(BINDIR)/HELLO.PL
+	cp BOING$(EXE) $(BINDIR)/BOING$(EXE)
 	ls -la . bin
 	echo "==== START ===="
 	./hello.pl
 	./BOING hello.pl || echo "PATH does not contain . in BOING" 
+	PATH="$(BINDIR):$(PATH)" ./BOING BOING true
 	PATH="$(BINDIR):$(PATH)" HELLO.PL
 	PATH="$(BINDIR):$(PATH)" ./BOING HELLO.PL
 
