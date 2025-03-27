@@ -22,11 +22,17 @@ setup:
 test:
 	@echo "==== START ===="
 	./$(SRC)
+	@echo "==============="
 	$(INST) || echo "ERROR: cannot exec $(INST) (from bin)"
+	@echo "==============="
 	$(LAUNCHER) BOING true || echo "ERROR: launcher cannot exec BOING"
+	@echo "==============="
 	$(LAUNCHER) $(SRC) || echo "EXPECTED: PATH does not contain . in $(LAUNCHER)" 
+	@echo "==============="
 	$(LAUNCHER) $(INST) || echo "ERROR: $(LAUNCHER) cannot exec $(INST) (from bin)"
+	@echo "==============="
 	$(LAUNCHER) $(INSTOTHER) || echo "EXPECTED: $(LAUNCHER) cannot exec $(INSTOTHER) (from bin)"
+	@echo "==============="
 
 clean:
 	rm -rf *.cm* *.exe BOING yadda* foobar $(BINDIR)
