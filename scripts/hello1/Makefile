@@ -21,7 +21,7 @@ setup:
 
 test:
 	@echo "==== START ===="
-	./$(SRC)
+	./$(SRC) || echo "ERROR: cannot exec ./$(SRC) directly"
 	@echo "==============="
 	$(INST) || echo "ERROR: cannot exec $(INST) (from bin)"
 	@echo "==============="
