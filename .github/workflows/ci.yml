@@ -39,6 +39,17 @@ jobs:
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
 
+      - name: install Perl deps
+        if: runner.os == 'Windows'
+        run: |
+          set -x
+          cpan -j tools/Config.pm -T -f -i String::ShellQuote || true
+          cpan -j tools/Config.pm -T -f -i IPC::System::Simple || true
+          cpan -J
+          perl -MString::Shellquote -e 'print "String::ShellQuote installed\n"'
+          perl -MIPC::System::Simple -e 'print "IPC::System::Simple installed\n"'
+        shell: bash
+
       - name: Show what is cached
         run: |
           opam switch
@@ -50,7 +61,13 @@ jobs:
           opam install -y ocamlfind fmt
         shell: bash
 
-      - name: Run Something
+      - name: Run test with ./BOING
         run: |
           opam exec -- make -C perl/hello1 all
+        shell: bash
+
+      - name: Run test with ./LAUNCH.PL
+        if: always()
+        run: |
+          opam exec -- make -C perl/hello1 LAUNCHER=./LAUNCH.PL all
         shell: bash
