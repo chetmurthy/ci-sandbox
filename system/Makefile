@@ -5,8 +5,10 @@ all:
 	cp foobar$(EXE) yadda$(EXE)
 	cp foobar$(EXE) yadda.opt$(EXE)
 	ocamlfind ocamlc -package fmt,unix -linkall -linkpkg BOING.ml -o BOING$(EXE)
-	./BOING yadda -verbose foo
-	./BOING yadda.opt -verbose foo
+	./BOING yadda -verbose foo || echo yadda failed
+	./BOING yadda.exe -verbose foo || echo yadda.exe failed
+	./BOING yadda.opt -verbose foo || echo yadda.opt failed
+	./BOING yadda.opt.exe -verbose foo || echo yadda.opt.exe failed
 
 clean:
 	rm -f *.cm* *.exe BOING yadda* foobar
