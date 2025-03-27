@@ -31,7 +31,7 @@ test:
 	@echo "==============="
 	$(LAUNCHER) $(INST) || echo "ERROR: $(LAUNCHER) cannot exec $(INST) (from bin)"
 	@echo "==============="
-	$(LAUNCHER) $(INSTOTHER) || echo "EXPECTED: $(LAUNCHER) cannot exec $(INSTOTHER) (from bin)"
+	$(LAUNCHER) $(INSTOTHER) || echo "ERROR: $(LAUNCHER) cannot exec $(INSTOTHER) (from bin); Windows path-lookup should be case-insensitive"
 	@echo "==============="
 
 clean:
