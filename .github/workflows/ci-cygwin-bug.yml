@@ -70,5 +70,5 @@ jobs:
       - name: Run cygwin bug -- failing case
         if: always()
         run: |
-          opam exec -- env INCL=/cygdrive/d/a/ci-sandbox/ci-sandbox/cygwin/a make -C cygwin all
+          opam exec -- env INCL=`pwd`/cygwin/a make -C cygwin all
         shell: bash
