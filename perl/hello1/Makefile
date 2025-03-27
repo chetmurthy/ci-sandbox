@@ -10,7 +10,7 @@ all:
 	echo "==== START ===="
 	./hello.pl
 	./BOING hello.pl || echo "PATH does not contain . in BOING" 
-	PATH=$(BINDIR):$(PATH) ./BOING HELLO.PL
+	PATH="$(BINDIR):$(PATH)" ./BOING HELLO.PL
 
 clean:
 	rm -rf *.cm* *.exe BOING yadda* foobar $(BINDIR)
