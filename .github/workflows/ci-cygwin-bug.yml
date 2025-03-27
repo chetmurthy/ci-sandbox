@@ -56,6 +56,11 @@ jobs:
           opam list
           opam pin list
 
+      - name: install ocamlfind
+        run: |
+          opam install -y ocamlfind fmt
+        shell: bash
+
       - name: Run cygwin bug -- working case
         if: always()
         run: |
