@@ -19,10 +19,10 @@ setup:
 test:
 	@echo "==== START ===="
 	./hello.pl
-	$(LAUNCHER) hello.pl || echo "EXPECTED: PATH does not contain . in BOING" 
-	$(LAUNCHER) BOING true || echo "ERROR: launcher cannot exec BOING"
 	HELLO.PL || echo "ERROR: cannot exec HELLO.PL (from bin)"
-	$(LAUNCHER) HELLO.PL || echo "ERROR: launcher cannot exec HELLO.PL (from bin)"
+	$(LAUNCHER) hello.pl || echo "EXPECTED: PATH does not contain . in $(LAUNCHER)" 
+	$(LAUNCHER) BOING true || echo "ERROR: launcher cannot exec $(LAUNCHER)"
+	$(LAUNCHER) HELLO.PL || echo "ERROR: $(LAUNCHER) cannot exec HELLO.PL (from bin)"
 
 clean:
 	rm -rf *.cm* *.exe BOING yadda* foobar $(BINDIR)
