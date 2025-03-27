@@ -1,0 +1,63 @@
+name: CI-CYGWIN-BUG
+on: [workflow_dispatch]
+
+env:
+  OPAMYES: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        ocaml-compiler: [5.3.0]
+        setup-version: [v3]
+
+    outputs:
+      total_matrix_jobs: ${{ strategy.job-total || 0 }}
+      metric: ${{ steps.collect-metrics.outputs.metric }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Cache Opam dependencies (Windows)
+        id: cache-opam-windows
+        if: runner.os == 'Windows'
+        uses: actions/cache@v4
+        with:
+          path: D:\.opam
+          key: windows-${{ matrix.ocaml-compiler }}-with-test-${{ matrix.setup-version }}-${{ hashFiles('*.opam') }}-cache
+          restore-keys: windows-${{ matrix.ocaml-compiler }}-with-test-${{ matrix.setup-version }}
+
+      - name: Setup Ocaml with v3
+        if: matrix.setup-version == 'v3'
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: ${{ matrix.ocaml-compiler }}
+
+      - name: install Perl deps
+        if: runner.os == 'Windows'
+        run: |
+          set -x
+          cpan -j tools/Config.pm -T -f -i String::ShellQuote || true
+          cpan -j tools/Config.pm -T -f -i IPC::System::Simple || true
+          cpan -J
+          perl -MString::Shellquote -e 'print "String::ShellQuote installed\n"'
+          perl -MIPC::System::Simple -e 'print "IPC::System::Simple installed\n"'
+        shell: bash
+
+      - name: Show what is cached
+        run: |
+          opam switch
+          opam list
+          opam pin list
+
+      - name: Run cygwin bug -- working case
+        if: always()
+        run: |
+          opam exec -- make -C cygwin all
+        shell: bash
