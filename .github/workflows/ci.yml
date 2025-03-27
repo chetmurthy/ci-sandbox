@@ -63,11 +63,11 @@ jobs:
 
       - name: Run test with ./BOING
         run: |
-          opam exec -- make -C perl/hello1 all
+          opam exec -- make -C scripts/hello1 all
         shell: bash
 
       - name: Run test with ./LAUNCH.PL
         if: always()
         run: |
-          opam exec -- make -C perl/hello1 LAUNCHER=./LAUNCH.PL all
+          opam exec -- make -C scripts/hello1 LAUNCHER=./LAUNCH.PL all
         shell: bash
