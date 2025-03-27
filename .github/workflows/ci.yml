@@ -52,5 +52,5 @@ jobs:
 
       - name: Run Something
         run: |
-          opam exec -- make -C newline all
+          opam exec -- make -C system all
         shell: bash
